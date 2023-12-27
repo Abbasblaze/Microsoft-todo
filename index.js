@@ -6,6 +6,7 @@ const remindController = require("./controller/remind.controller");
 const imprtantController = require("./controller/important.controller");
 const plannedController = require("./controller/planned.controller");
 const assignedController = require("./controller/assigned.controller");
+const searchController = require("./controller/search.controller");
 
 const app = express();
 
@@ -17,6 +18,9 @@ app.use((req, _, next) => {
   console.log(req.url);
   next();
 });
+
+// Search API
+app.get("/search/", searchController.search);
 
 // tasks (Working)
 app.get("/tasks", mydayController.getAll);
