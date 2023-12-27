@@ -25,9 +25,9 @@ app.delete("/delete/:id", mydayController.delete);
 app.put("/update/:id", mydayController.updateTask);
 app.get("/task/:id", mydayController.getById);
 
-//remind
+//remind (Workingl)
 app.get("/remind", remindController.getAll);
-app.post("`/create/reminder`", remindController.create);
+app.post("/create/reminder", remindController.create);
 app.delete("/reminder/:id", remindController.delete);
 app.put("/reminder/:id", remindController.updateReminder);
 
@@ -35,10 +35,11 @@ app.put("/reminder/:id", remindController.updateReminder);
 app.get("/impTask", imprtantController.getAll);
 app.post("/create/imptask", imprtantController.create);
 app.delete("/impTask/:id", imprtantController.delete);
+7;
 app.put("/impTask/:id", imprtantController.updateImportantTask);
 app.get("/impTask/:id", imprtantController.getById);
 
-//Planned tasks
+//Planned tasks  (Working)
 app.get("/plannedtask", plannedController.getAll);
 app.post("/create/plannedtask", plannedController.create);
 app.delete("/plannedtask/:id", plannedController.delete);

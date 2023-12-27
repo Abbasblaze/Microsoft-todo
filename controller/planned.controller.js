@@ -1,6 +1,6 @@
 const db = require("../db");
 
-const Task = require("../models/planned.models.js");
+const plannedtasks = require("../models/planned.models.js");
 
 // create planned Task
 exports.create = async (req, res) => {
@@ -11,7 +11,7 @@ exports.create = async (req, res) => {
       });
       return;
     }
-    const data = await Planned.create(req.body);
+    const data = await plannedtasks.create(req.body);
     res.status(200).json({
       success: true,
       message: "Planned task created successfully",
@@ -29,7 +29,7 @@ exports.create = async (req, res) => {
 // get all planned Task
 exports.getAll = (req, res) => {
   const id = req.query.id;
-  Planned.getAll(id, (err, data) => {
+  plannedtasks.getAll(id, (err, data) => {
     if (err)
       res.status(500).send({
         message: "Some error occurred while retrieving planned Task.",
@@ -40,7 +40,7 @@ exports.getAll = (req, res) => {
 
 // Delete a planned Task
 exports.delete = (req, res) => {
-  Planned.delete(req.params.id, (err, data) => {
+  plannedtasks.delete(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -65,7 +65,7 @@ exports.updatePlannedTask = async (req, res) => {
       return;
     }
 
-    const data = await Planned.create(req.body);
+    const data = await plannedtasks.create(req.body);
     res.status(200).json({
       success: true,
       message: "planned Task updated successfully",
@@ -82,7 +82,7 @@ exports.updatePlannedTask = async (req, res) => {
 
 // Find a single planned Task by Id
 exports.getById = (req, res) => {
-  Planned.getById(req.params.id, (err, data) => {
+  plannedtasks.getById(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         return res.status(404).json({

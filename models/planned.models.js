@@ -1,29 +1,30 @@
 const db = require("../db");
 
 // constructor
-class Planned {
-  constructor(planned) {
-    this.planned = planned;
+class plannedtasks {
+  constructor(plantasks) {
+    this.plantasks = plantasks;
   }
 }
 // create planned task
 exports.create = (req, result) => {
   db.query(
-    `INSERT INTO "planned" (plannedTasks) 
-      VALUES ('${req.plannedTasks}' )`,
-    (err) => {
+    `INSERT INTO "plannedtasks" (id, plantasks) 
+    VALUES ('${req.id}', '${req.plantasks}')`,
+    (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(err, null);
         return;
       }
+
+      console.log("planned Task has been created successfully: ", res);
     }
   );
 };
 
 // get all planned task
 exports.getAll = (req, result) => {
-  db.query(`SELECT * FROM "planned"`, (err) => {
+  db.query(`SELECT * FROM "plannedtasks"`, (err) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -34,7 +35,7 @@ exports.getAll = (req, result) => {
 
 // Delete a planned task
 exports.delete = (id, result) => {
-  db.query(`DELETE FROM "planned" WHERE id = ( '${id}' )`, (err, res) => {
+  db.query(`DELETE FROM "plannedtasks" WHERE id = ( '${id}' )`, (err, res) => {
     if (err) {
       console.error("error: ", err);
       result(err, null);
@@ -55,7 +56,7 @@ exports.delete = (id, result) => {
 // Update a planned task
 exports.updatePlannedTask = (result) => {
   db.query(
-    `UPDATE "planned" (plannedTasks) 
+    `UPDATE "plannedtasks" (plantasks) 
     SET  ('${req.tasks}')`,
     (err, res) => {
       if (err) {
@@ -74,7 +75,7 @@ exports.updatePlannedTask = (result) => {
 
 // Find a single planned task by Id
 exports.getById = (req, result) => {
-  db.query(`SELECT * FROM "planned" WHERE id = ${req}`, (err, res) => {
+  db.query(`SELECT * FROM "plannedtasks" WHERE id = ${req}`, (err, res) => {
     if (err) {
       result({ kind: "not_found" }, null);
     } else {

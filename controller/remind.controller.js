@@ -1,5 +1,5 @@
 const db = require("../db");
-const Task = require("../models/remind.models.js");
+const reminder = require("../models/remind.models.js");
 
 // create reminder
 exports.create = async (req, res) => {
@@ -10,7 +10,7 @@ exports.create = async (req, res) => {
       });
       return;
     }
-    const data = await Remind.create(req.body);
+    const data = await reminder.create(req.body);
     res.status(200).json({
       success: true,
       message: "Reminder  has been created successfully",
@@ -28,7 +28,7 @@ exports.create = async (req, res) => {
 // get all reminders
 exports.getAll = (req, res) => {
   const id = req.query.id;
-  Task.getAll(id, (err, data) => {
+  reminder.getAll(id, (err, data) => {
     if (err)
       res.status(500).send({
         message: "Some error occurred while retrieving reminder.",
@@ -39,7 +39,7 @@ exports.getAll = (req, res) => {
 
 // Delete a reminder
 exports.delete = (req, res) => {
-  Task.delete(req.params.id, (err, data) => {
+  reminder.delete(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -64,7 +64,7 @@ exports.updateReminder = async (req, res) => {
       return;
     }
 
-    const data = await Remind.create(req.body);
+    const data = await reminder.create(req.body);
     res.status(200).json({
       success: true,
       message: "reminder updated successfully",

@@ -1,29 +1,30 @@
 const db = require("../db");
 
 // constructor
-class Remind {
-  constructor(remind) {
-    this.remind = remind;
+class reminder {
+  constructor(reminders) {
+    this.reminders = reminders;
   }
 }
 // create reminder
 exports.create = (req, result) => {
   db.query(
-    `INSERT INTO "Remind" (remind) 
-      VALUES ('${req.Remind}')`,
-    (err) => {
+    `INSERT INTO "reminder" (reminders , id) 
+      VALUES ('${req.reminders}' ,'${req.id}')`,
+    (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(err, null);
         return;
       }
+
+      console.log("Reminder is created successfully: ", res);
     }
   );
 };
 
 // get all reminder
 exports.getAll = (req, result) => {
-  db.query(`SELECT * FROM "Remind"`, (err) => {
+  db.query(`SELECT * FROM "reminder"`, (err) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -34,7 +35,7 @@ exports.getAll = (req, result) => {
 
 // Delete a reminder
 exports.delete = (id, result) => {
-  db.query("DELETE FROM Remind WHERE id = ?", id, (err, res) => {
+  db.query(`DELETE FROM reminder WHERE id =  ( '${id}' )`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -46,13 +47,15 @@ exports.delete = (id, result) => {
       result({ kind: "not_found" }, null);
       return;
     }
+    console.log(`reminder is deleted with id: ${id}`);
+    result(null, res);
   });
 };
 
 // Update a reminder
 exports.updateReminder = (result) => {
   db.query(
-    `UPDATE "Remind" (Remind) 
+    `UPDATE "reminder" (reminders) 
       SET  ('${req.tasks}')`,
     (err, res) => {
       if (err) {
