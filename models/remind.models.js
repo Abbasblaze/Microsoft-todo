@@ -10,7 +10,7 @@ class Remind {
 exports.create = (req, result) => {
   db.query(
     `INSERT INTO "Remind" (remind) 
-        VALUES ('${req.Remind}')`,
+      VALUES ('${req.Remind}')`,
     (err) => {
       if (err) {
         console.log("error: ", err);

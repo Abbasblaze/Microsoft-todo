@@ -1,6 +1,6 @@
 const db = require("../db");
 
-const Task = require("../models/important.models.js");
+const Important = require("../models/important.models.js");
 
 // create ImportantTask
 exports.create = async (req, res) => {
@@ -11,7 +11,7 @@ exports.create = async (req, res) => {
       });
       return;
     }
-    const data = await Task.create(req.body);
+    const data = await Important.create(req.body);
     res.status(200).json({
       success: true,
       message: "important task has been created successfully",
@@ -29,7 +29,7 @@ exports.create = async (req, res) => {
 // get all ImportantTask
 exports.getAll = (req, res) => {
   const id = req.query.id;
-  important.getAll(id, (err, data) => {
+  Important.getAll(id, (err, data) => {
     if (err)
       res.status(500).send({
         message: "Some error occurred while retrieving ImportantTask.",
@@ -40,7 +40,7 @@ exports.getAll = (req, res) => {
 
 // Delete a ImportantTask
 exports.delete = (req, res) => {
-  important.delete(req.params.id, (err, data) => {
+  Important.delete(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -65,7 +65,7 @@ exports.updateImportantTask = async (req, res) => {
       return;
     }
 
-    const data = await important.create(req.body);
+    const data = await Important.create(req.body);
     res.status(200).json({
       success: true,
       message: "ImportantTask updated successfully",
@@ -82,7 +82,7 @@ exports.updateImportantTask = async (req, res) => {
 
 // Find a single ImportantTask by Id
 exports.getById = (req, res) => {
-  important.getById(req.params.id, (err, data) => {
+  Important.getById(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         return res.status(404).json({

@@ -10,16 +10,17 @@ exports.create = async (req, res) => {
       });
       return;
     }
-
+    const data = await Remind.create(req.body);
     res.status(200).json({
       success: true,
-      message: "reminder created successfully",
+      message: "Reminder  has been created successfully",
+      data: data,
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
       success: false,
-      message: "Error occurred while creating the reminder.",
+      message: "Error occurred while creating the Reminder .",
     });
   }
 };

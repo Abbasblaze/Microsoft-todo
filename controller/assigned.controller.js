@@ -1,8 +1,8 @@
 const db = require("../db");
 
-const Task = require("../models/myDay.models.js");
+const assigned = require("../models/assigned.models.js");
 
-// create assigned Tasks
+// create assigned Tasks (W)
 exports.create = async (req, res) => {
   try {
     if (!req.body) {
@@ -11,17 +11,17 @@ exports.create = async (req, res) => {
       });
       return;
     }
-    const data = await Assigend.create(req.body);
+    const data = await assigned.create(req.body);
     res.status(200).json({
       success: true,
-      message: "assigned tasks created successfully",
+      message: "Task has been assigned successfully",
       data: data,
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
       success: false,
-      message: "Error occurred while creating the assigned tasks .",
+      message: "Error occurred while creating the task.",
     });
   }
 };
@@ -40,7 +40,7 @@ exports.getAll = (req, res) => {
 
 // Delete a assigned Tasks
 exports.delete = (req, res) => {
-  Assigend.delete(req.params.id, (err, data) => {
+  assigned.delete(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -48,7 +48,7 @@ exports.delete = (req, res) => {
         });
       } else {
         res.status(500).send({
-          message: "Could not delete task with id " + req.params.id,
+          message: "Could not delete assigned task with id " + req.params.id,
         });
       }
     } else res.send({ message: `assigned Task is deleted successfully!` });
@@ -65,7 +65,7 @@ exports.updateAssignedTask = async (req, res) => {
       return;
     }
 
-    const data = await Assigend.create(req.body);
+    const data = await assigned.create(req.body);
     res.status(200).json({
       success: true,
       message: "assigned Task updated successfully",
@@ -82,7 +82,7 @@ exports.updateAssignedTask = async (req, res) => {
 
 // Find a single assigned Tasksby Id
 exports.getById = (req, res) => {
-  Assigend.getById(req.params.id, (err, data) => {
+  assigned.getById(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         return res.status(404).json({

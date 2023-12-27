@@ -18,7 +18,7 @@ app.use((req, _, next) => {
   next();
 });
 
-// tasks
+// tasks (Working)
 app.get("/tasks", mydayController.getAll);
 app.post("/create/task", mydayController.create);
 app.delete("/delete/:id", mydayController.delete);
@@ -27,13 +27,13 @@ app.get("/task/:id", mydayController.getById);
 
 //remind
 app.get("/remind", remindController.getAll);
-app.post("/create/reminder", remindController.create);
+app.post("`/create/reminder`", remindController.create);
 app.delete("/reminder/:id", remindController.delete);
 app.put("/reminder/:id", remindController.updateReminder);
 
-//important tasks
+//important tasks (Working)
 app.get("/impTask", imprtantController.getAll);
-app.post("/create/impTask", imprtantController.create);
+app.post("/create/imptask", imprtantController.create);
 app.delete("/impTask/:id", imprtantController.delete);
 app.put("/impTask/:id", imprtantController.updateImportantTask);
 app.get("/impTask/:id", imprtantController.getById);
@@ -45,9 +45,9 @@ app.delete("/plannedtask/:id", plannedController.delete);
 app.put("/plannedtask/:id", plannedController.updatePlannedTask);
 app.get("/plannedtask/:id", plannedController.getById);
 
-//assigend Tasks
+//assigend Tasks (Wroking)
 app.get("/assigendtask", assignedController.getAll);
-app.post("/create/assigendtask", assignedController.create);
+app.post("/create/assigendTask", assignedController.create);
 app.delete("/assigendtask/:id", assignedController.delete);
 app.put("/assigendtask/:id", assignedController.updateAssignedTask);
 app.get("/assigendtask/:id", assignedController.getById);

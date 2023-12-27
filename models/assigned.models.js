@@ -1,16 +1,32 @@
 const db = require("../db");
 
 // constructor
-class Assigend {
-  constructor() {
-    this.assigned = assignedTask;
+class assigned {
+  constructor(assigned) {
+    this.assigned = assigned;
   }
 }
 // create task
 exports.create = (req, result) => {
   db.query(
-    `INSERT INTO "assignedToMe" (assignedTasks) 
-      VALUES ('${req.plannedTasks}' )`,
+    `INSERT INTO "assigned" (assignedtask , id) 
+    VALUES ('${req.assignedtask}' ,'${req.id}')`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        return;
+      }
+
+      console.log("Task has been assigned successfully: ", res);
+    }
+  );
+};
+
+// get all task
+exports.getAll = (req, result) => {
+  db.query(
+    `SELECT * FROM "class assigned {
+    "`,
     (err) => {
       if (err) {
         console.log("error: ", err);
@@ -21,20 +37,9 @@ exports.create = (req, result) => {
   );
 };
 
-// get all task
-exports.getAll = (req, result) => {
-  db.query(`SELECT * FROM "assignedToMe"`, (err) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
-  });
-};
-
 // Delete a task
 exports.delete = (id, result) => {
-  db.query(`DELETE FROM "assignedToMe" WHERE id = ( '${id}' )`, (err, res) => {
+  db.query(`DELETE FROM "assigned" WHERE id = ( '${id}' )`, (err, res) => {
     if (err) {
       console.error("error: ", err);
       result(err, null);
@@ -54,7 +59,7 @@ exports.delete = (id, result) => {
 // Update a task
 exports.updateAssignedTask = (result) => {
   db.query(
-    `UPDATE "assignedToMe" (assignedTasks) 
+    `UPDATE "assigned" (assignedtask) 
     SET  ('${req.tasks}')`,
     (err, res) => {
       if (err) {
@@ -73,7 +78,7 @@ exports.updateAssignedTask = (result) => {
 
 // Find a single task by Id
 exports.getById = (req, result) => {
-  db.query(`SELECT * FROM "assignedToMe" WHERE id = ${req}`, (err, res) => {
+  db.query(`SELECT * FROM "assigned" WHERE id = ${req}`, (err, res) => {
     if (err) {
       result({ kind: "not_found" }, null);
     } else {

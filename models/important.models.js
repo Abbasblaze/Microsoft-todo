@@ -1,29 +1,30 @@
 const db = require("../db");
 
 // constructor
-class important {
-  constructor(importantTask) {
-    this.importantTask = importantTask;
+class Important {
+  constructor(imptask) {
+    this.imptask = imptask;
   }
 }
-// create importantTask
+
 exports.create = (req, result) => {
   db.query(
-    `INSERT INTO "important" (importantTask) 
-      VALUES ('${req.importantTask}')`,
-    (err) => {
+    `INSERT INTO "Important" (id, imptask) 
+    VALUES ('${req.id}', '${req.impTask}')`,
+    (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(err, null);
         return;
       }
+
+      console.log("Important Task has been created successfully: ", res);
     }
   );
 };
 
 // get all importantTask
 exports.getAll = (req, result) => {
-  db.query(`SELECT * FROM "important"`, (err) => {
+  db.query(`SELECT * FROM "Important"`, (err) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -34,7 +35,7 @@ exports.getAll = (req, result) => {
 
 // Delete a importantTask
 exports.delete = (id, result) => {
-  db.query(`DELETE FROM "important" WHERE id = ( '${id}' )`, (err, res) => {
+  db.query(`DELETE FROM "Important" WHERE id = ( '${id}' )`, (err, res) => {
     if (err) {
       console.error("error: ", err);
       result(err, null);
@@ -55,8 +56,8 @@ exports.delete = (id, result) => {
 // Update a importantTask
 exports.updateImportantTask = (result) => {
   db.query(
-    `UPDATE "important" (importantTask) 
-    SET  ('${req.importantTask}')`,
+    `UPDATE "Important" (impTask) 
+    SET  ('${req.impTask}')`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -74,11 +75,14 @@ exports.updateImportantTask = (result) => {
 
 // Find a single importantTask by Id
 exports.getById = (req, result) => {
-  db.query(`SELECT * FROM "importantTask" WHERE id = ${req}`, (err, res) => {
-    if (err) {
-      result({ kind: "not_found" }, null);
-    } else {
-      return result(null, res.rows);
+  db.query(
+    `SELECT * FROM "Important                    " WHERE id = ${req}`,
+    (err, res) => {
+      if (err) {
+        result({ kind: "not_found" }, null);
+      } else {
+        return result(null, res.rows);
+      }
     }
-  });
+  );
 };
