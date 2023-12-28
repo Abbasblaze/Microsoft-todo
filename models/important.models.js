@@ -10,10 +10,10 @@ class Important {
 exports.create = (req, result) => {
   db.query(
     `INSERT INTO "Important" (id, imptask) 
-    VALUES ('${req.id}', '${req.impTask}')`,
+    VALUES ('${req.id}', '${req.imptask}')`,
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        console.error("error: ", err);
         return;
       }
 

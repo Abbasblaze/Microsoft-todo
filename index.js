@@ -39,7 +39,6 @@ app.put("/reminder/:id", remindController.updateReminder);
 app.get("/impTask", imprtantController.getAll);
 app.post("/create/imptask", imprtantController.create);
 app.delete("/impTask/:id", imprtantController.delete);
-7;
 app.put("/impTask/:id", imprtantController.updateImportantTask);
 app.get("/impTask/:id", imprtantController.getById);
 
