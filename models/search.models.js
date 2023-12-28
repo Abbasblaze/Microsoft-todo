@@ -10,18 +10,13 @@ class Search {
 // search apis
 exports.search = (id, tasks) => {
   db.query(
-    `SELECT id, task AS tasks, NULL AS reminders, NULL AS plantasks, NULL AS assignedtask FROM public.task
-    UNION ALL
-    SELECT id, NULL AS tasks, reminder AS reminders, NULL AS plantasks, NULL AS assignedtask FROM public.reminder
-    UNION ALL
-    SELECT id, NULL AS tasks, NULL AS reminders, plantasks, NULL AS assignedtask FROM public.plannedtasks
-    UNION ALL
-    SELECT id, NULL AS tasks, NULL AS reminders, NULL AS plantasks, assignedtask FROM public.assigned
-    WHERE tasks LIKE '%Your%'
-       OR reminders LIKE 'your%'
-       OR plantasks LIKE '%this'
-       OR assignedtask LIKE '_Your_task';
-    
+    `SELECT id, tasks, reminders, plantasks, assignedtask
+    FROM (
+        SELECT id, task AS tasks, NULL AS reminders, NULL AS plantasks, NULL AS assignedtask FROM task
+        UNION ALL
+        SELECT id, NULL AS tasks, reminder AS reminders, NULL AS plantasks, NULL AS assignedtask FROM reminder
+    ) AS combined
+    WHERE tasks IS NOT NULL OR reminders IS NOT NULL OR plantasks IS NOT NULL OR assignedtask IS NOT NULL;
     `,
     (err, res) => {
       if (err) {
