@@ -9,14 +9,12 @@ exports.search = async (req, res) => {
       });
       return;
     }
-
-    // Assuming req.body.id contains the search term
-    const searchResult = await Search.search(req.body.id);
+    const data = await Search.search(req.body.id);
 
     res.status(200).json({
       success: true,
       message: "The search result is given below",
-      data: searchResult,
+      data: data,
     });
   } catch (err) {
     console.error(err);
