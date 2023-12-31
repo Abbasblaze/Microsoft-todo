@@ -8,7 +8,7 @@ class Search {
 }
 
 // search apis
-exports.search = (id, key) => {
+exports.search = (id) => {
   db.query(
     `SELECT tasks AS tasks, NULL AS reminder, NULL AS plantasks, NULL AS assignedtasks
     FROM task

@@ -9,12 +9,12 @@ exports.search = async (req, res) => {
       });
       return;
     }
-    const data = await Search.search(req.body.id);
+    const rows = await Search.search(req.body.id);
 
     res.status(200).json({
       success: true,
       message: "The search result is given below",
-      data: [res.data],
+      data: [rows],
     });
   } catch (err) {
     console.error(err);
