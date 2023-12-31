@@ -7,6 +7,7 @@ const imprtantController = require("./controller/important.controller");
 const plannedController = require("./controller/planned.controller");
 const assignedController = require("./controller/assigned.controller");
 const searchController = require("./controller/search.controller");
+const mailerController = require("./controller/mailer.controller");
 
 const app = express();
 
@@ -56,7 +57,10 @@ app.delete("/assigendtask/:id", assignedController.delete);
 app.put("/assigendtask/:id", assignedController.updateAssignedTask);
 app.get("/assigendtask/:id", assignedController.getById);
 
+// nodemailer (----)
+app.get("/mailer", mailerController.nodemailer);
+
 // Listening to PORT: 8080
 app.listen(8080, function () {
-  console.log("⚡️ Server is running on port 8080");
+  console.log("✔ Server is running on port 8080");
 });
