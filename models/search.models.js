@@ -8,22 +8,23 @@ class Search {
 }
 
 // search apis
-exports.search = (id, tasks) => {
+exports.search = (id, key) => {
   db.query(
-    `SELECT * FROM task
-    WHERE tasks LIKE '%your%'
-    AND
-    SELECT * FROM reminder
-    WHERE reminders LIKE '%need%'
-    AND
-    SELECT * FROM plannedtasks
-    WHERE plantasks LIKE '%planned%'
-    AND
-    SELECT * FROM assigned
-    WHERE assignedtask LIKE '%today , new%'
-    AND
-    SELECT * FROM Important
-    WHERE imptask LIKE '%complete%';
+    `SELECT tasks AS tasks, NULL AS reminder, NULL AS plantasks, NULL AS assignedtasks
+    FROM task
+    WHERE tasks LIKE 'Y%'
+    UNION 
+    SELECT NULL AS tasks, reminders AS reminder, NULL AS plantasks, NULL AS assignedtasks
+    FROM reminder
+    WHERE reminders LIKE 'Y%'
+    UNION 
+    SELECT NULL AS tasks, NULL AS reminder, plantasks AS plantasks, NULL AS assignedtasks
+    FROM plannedtasks
+    WHERE plantasks LIKE 'Y%'
+    UNION 
+    SELECT NULL AS tasks, NULL AS reminder, NULL AS plantasks, assignedtask AS assignedtasks
+    FROM assigned
+    WHERE assignedtask LIKE 'Y%';
     `,
     (err, res) => {
       if (err) {
