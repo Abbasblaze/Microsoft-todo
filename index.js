@@ -7,7 +7,7 @@ const imprtantController = require("./controller/important.controller");
 const plannedController = require("./controller/planned.controller");
 const assignedController = require("./controller/assigned.controller");
 const searchController = require("./controller/search.controller");
-// const mailController = require("./mail.controller");
+// const mailController = require("./controller/mail.controller");
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use((req, _, next) => {
 });
 
 // // node mailer
-// app.post("/sendMail", mailController.sendMail);
+// app.post("/sendMail", mailController.nodemailer);
 
 // Search API
 app.get("/search/", searchController.search);
