@@ -7,7 +7,7 @@ const imprtantController = require("./controller/important.controller");
 const plannedController = require("./controller/planned.controller");
 const assignedController = require("./controller/assigned.controller");
 const searchController = require("./controller/search.controller");
-const mailerController = require("./controller/mailer.controller");
+// const mailController = require("./mail.controller");
 
 const app = express();
 
@@ -19,6 +19,9 @@ app.use((req, _, next) => {
   console.log(req.url);
   next();
 });
+
+// // node mailer
+// app.post("/sendMail", mailController.sendMail);
 
 // Search API
 app.get("/search/", searchController.search);
@@ -56,9 +59,6 @@ app.post("/create/assigendTask", assignedController.create);
 app.delete("/assigendtask/:id", assignedController.delete);
 app.put("/assigendtask/:id", assignedController.updateAssignedTask);
 app.get("/assigendtask/:id", assignedController.getById);
-
-// nodemailer (----)
-app.get("/mailer", mailerController.nodemailer);
 
 // Listening to PORT: 8080
 app.listen(8080, function () {
