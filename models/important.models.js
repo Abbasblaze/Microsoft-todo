@@ -7,10 +7,11 @@ class Important {
   }
 }
 
+// create ImportantTask
 exports.create = (req, result) => {
   db.query(
-    `INSERT INTO "Important" (id, imptask) 
-    VALUES ('${req.id}', '${req.imptask}')`,
+    `INSERT INTO "Important" (id, imptask , taskfor , groupid , groupname) 
+    VALUES ('${req.id}', '${req.imptask}' ,'${req.taskfor}', '${req.groupid}', '${req.groupname}')`,
     (err, res) => {
       if (err) {
         console.error("error: ", err);

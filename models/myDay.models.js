@@ -9,8 +9,8 @@ class Task {
 // create task
 exports.create = (req, result) => {
   db.query(
-    `INSERT INTO "task" (tasks , id) 
-      VALUES ('${req.tasks}' ,'${req.id}')`,
+    `INSERT INTO "task" (id , tasks , taskfor) 
+      VALUES ('${req.id}' ,'${req.tasks}','${req.taskfor}')`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -43,7 +43,6 @@ exports.delete = (id, result) => {
     }
 
     if (res.affectedRows === 0) {
-      // Task with the specified id not found
       result({ kind: "not_found" }, null);
       return;
     }
@@ -57,7 +56,7 @@ exports.delete = (id, result) => {
 exports.update = (result) => {
   db.query(
     `UPDATE "task" (tasks) 
-    SET  ('${req.tasks}')`,
+    SET  ('${req.tasks}', '${req.taskfor}')`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);

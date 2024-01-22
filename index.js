@@ -61,6 +61,6 @@ app.put("/assigendtask/:id", assignedController.updateAssignedTask);
 app.get("/assigendtask/:id", assignedController.getById);
 
 // Listening to PORT: 8080
-app.listen(8080, function () {
+app.listen(8082, function () {
   console.log("✔ Server is running on port 8080");
 });
